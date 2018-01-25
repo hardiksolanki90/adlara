@@ -123,6 +123,11 @@ class MediaController extends AdminController
 
     public function initGetLibrary($media_type = null, $object_type = null)
     {
+        if (count($object_type)) {
+          $object_type = $object_type;
+        } else {
+          $object_type = 'image';
+        }
         $this->page_title = 'Media Library';
 
         if ($media_type && $object_type) {
@@ -133,6 +138,7 @@ class MediaController extends AdminController
           ->paginate(20);
         } else {
           $media = $this->context->media->orderBy('id', 'desc')->paginate(20);
+          pre($media);
         }
 
         $data = [

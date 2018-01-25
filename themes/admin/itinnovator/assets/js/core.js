@@ -1,3 +1,4 @@
+URL = 'https://dev.adlara.com/authority';
 $(document).ready(function () {
   $(document).on('focus', '.mdl-input', function () {
     $(this).parent().addClass('is-focused');
@@ -195,36 +196,60 @@ $(document).on('submit', '.myForm', function (e) {
         $($sub_button).removeClass('m-loader');
     });
 });
-function formValidate(form)
-{
-      rf = form.find('#required').val();
+function formValidate(form) {
+    rf = form.find('#required').val();
 
-      if (!rf) {
-        return true;
-      }
-      rf = rf.split(',');
-
-      errors = false;
-      $.each(rf, function(i) {
-         input = '#' + rf[i];
-         input_bar = form.find(input);
-         if (!input_bar) {
-             return;
-         }
-         myVal = input_bar.val();
-         if (!myVal) {
-            console.log(input);
-             label = $(input_bar).parent().find('label');
-             $(input_bar).parent().addClass('invalid');
-             if (label.text() != '') {
-                 toastr.error(label.text() + ' is required');
-             }
-             errors = true;
-         }
-      });
-      if (errors) {
-          return false;
-      }
-
+    if (!rf) {
       return true;
-  }
+    }
+    rf = rf.split(',');
+
+    errors = false;
+    $.each(rf, function(i) {
+       input = '#' + rf[i];
+       input_bar = form.find(input);
+       if (!input_bar) {
+           return;
+       }
+       myVal = input_bar.val();
+       if (!myVal) {
+          console.log(input);
+           label = $(input_bar).parent().find('label');
+           $(input_bar).parent().addClass('invalid');
+           if (label.text() != '') {
+               toastr.error(label.text() + ' is required');
+           }
+           errors = true;
+       }
+    });
+    if (errors) {
+        return false;
+    }
+
+    return true;
+}
+
+function table_filter()
+{
+  $(document).off('._ft');
+  $('._ft').each(function () {
+    tr_filter = $(this).find('tr.filter');
+    thead = $(this).find('thead');
+    th = $(this).find('th');
+
+    html = '<tr class="filter"></tr>';
+    $(tr_filter).remove();
+    $(thead).append(html);
+
+    tr_filter = $(this).find('tr.filter');
+    $(th).each(function() {
+      filter = $(this).attr('filter');
+      if (filter && filter.length) {
+        html = '<td><input type="text" id="' + filter + '" filter="' + filter + '" class="form-control _tf"></td>';
+      } else {
+        html = '<td>-</td>';
+      }
+      $(tr_filter).append(html);
+    });
+  });
+}

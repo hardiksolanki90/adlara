@@ -21,7 +21,7 @@ class CreateLogTable extends Migration
             $table->integer('line');
             $table->timestamps();
             $table->softDeletes();
-			$table->engine = 'InnoDB';
+			      $table->engine = 'InnoDB';
         });
     }
 

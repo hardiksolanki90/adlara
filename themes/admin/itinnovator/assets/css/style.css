@@ -187,3 +187,16 @@ input:focus {
 a:hover {
   text-decoration: none !important;
 }
+
+.o-hidden {
+    overflow: hidden;
+}
+
+.flex.row-wrap {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.space-between {
+    justify-content: space-between;
+}

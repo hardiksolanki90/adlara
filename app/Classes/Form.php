@@ -21,6 +21,27 @@ class Form
 
     }
 
+    public function media($id, $text, $obj = null, $multiple = false)
+    {
+        $w = false;
+        $html = '';
+        if ($obj && count($obj)) {
+          $html .= '<div class="select-media-wrapper">';
+          $w = true;
+        }
+        $div_id = str_replace('[]', '', $id);
+        $html .= '<button '.($multiple ? 'multiple' : '').' type="button" id="'.$div_id.'" class="btn btn-media select-media" name="'.$id.'"><i class="la la-cloud-upload"></i> ' . $text . '</button>';
+        if ($w) {
+          $html .= generateMedia($id, $obj);
+        }
+        if ($w) {
+          $html .= '</div>';
+        }
+
+        return $html;
+    }
+
+
     public function mdtext($data = array())
     {
         $default = [

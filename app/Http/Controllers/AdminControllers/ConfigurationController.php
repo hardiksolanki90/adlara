@@ -58,7 +58,7 @@ class ConfigurationController extends AdminController
 
     $optionValue = array('1' => 'Yes', '0' => 'No');
 
-    $data = [
+    $this->assign = [
       'optionValue' => $optionValue,
       'ADMIN_EMAIL' => $ADMIN_EMAIL[0],
       'SITE_URL' => $SITE_URL[0],
@@ -68,7 +68,7 @@ class ConfigurationController extends AdminController
       'last_DEBUG_MODE' => $last_DEBUG_MODE[0],
     ];
 
-    return $this->template('configuration.create', $data);
+    return $this->template('configuration.create');
 
   }
 
@@ -85,7 +85,7 @@ class ConfigurationController extends AdminController
       return json('success', 'Configuration updated');
   }
 
-  public function initClearCache()
+  public function initProcessClearCache()
   {
       Cache::flush();
       return jsonResponse('success', 'Cache Clear');

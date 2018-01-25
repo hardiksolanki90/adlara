@@ -23,6 +23,10 @@ class Context
 
     protected $lang;
 
+    protected $media;
+
+    protected $translate;
+
     protected $configuration;
 
     public function __get($property)
@@ -129,7 +133,28 @@ class Context
      */
     public function getConfiguration()
     {
+        // $foo = new ;
         return $this->configuration = new \App\Objects\Configuration;
+    }
+
+    /**
+     * Get the Configuration
+     *
+     * @return mixed
+     */
+    public function getMedia()
+    {
+        return $this->media = new \App\Objects\Media;
+    }
+
+    /**
+     * Get the Configuration
+     *
+     * @return mixed
+     */
+    public function getTranslate()
+    {
+        return $this->media = new \App\Classes\Translate;
     }
 
 }

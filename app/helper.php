@@ -335,7 +335,6 @@ function prepareHTML($html)
     return $core->buildHTML();
 }
 
-
 function generateMedia($id, $mediaList, $type = 'image', $var_type = 'string')
 {
     if (!isset($mediaList)) {
@@ -345,11 +344,14 @@ function generateMedia($id, $mediaList, $type = 'image', $var_type = 'string')
     $ids = '';
     $t = '';
     $html = '<div id="'.$id.'_wrapper" class="preview-wrapper">';
+    $ids = implode(',', $mediaList->pluck('id')->toArray());
     if (count($mediaList) > 1) {
-      foreach ($mediaList as $key => $media) {
-        $media_opt = $media;
-        if (!$media_opt) {
-          continue;
+        foreach ($mediaList as $key => $media) {
+          $media_opt = $media;
+          if (!$media_opt) {
+            continue;
+          }
+          $html .= generateMediaHTML($media_opt);
         }
 
         if ($ids) {
@@ -358,7 +360,6 @@ function generateMedia($id, $mediaList, $type = 'image', $var_type = 'string')
           $ids = ''.$media_opt->id;
         }
         $html .= generateMediaHTML($media_opt);
-      }
     } else {
       if (isset($mediaList[0])) {
         $m = $mediaList[0];
@@ -377,7 +378,6 @@ function generateMedia($id, $mediaList, $type = 'image', $var_type = 'string')
     $html .= '</div>';
     return $html;
 }
-
 
 function generateMediaHTML($media_opt)
 {
@@ -453,4 +453,49 @@ function psa($string)
 {
     $string = str_replace('-', '', $string);
     return $string;
+}
+
+function resize($path, $image, $size1, $size2)
+{
+    if (!$size1 || !$size2) {
+        return;
+    }
+
+    $size1 = trim($size1);
+    $size2 = trim($size2);
+
+    $background = Image::canvas($size1, $size2);
+
+    $size_folder = $size1.'X'.$size2;
+    if (!file_exists($path.$size_folder)) {
+        mkdir($path.$size_folder);
+    }
+
+    $img = Image::make($path.$image);
+    $img->resize($size1, $size2, function ($constraint) {
+       $constraint->aspectRatio();
+    });
+
+    // Fill up the blank spaces with transparent color
+    if ($img) {
+        $img->resizeCanvas(null, $size2, 'center', false, array(255, 255, 255, 0));
+        //$img->resize(intval($size1),intval($size2));
+        // add callback functionality to retain maximal original image size
+        //$background->insert($image, 'center');
+        //$img->fit(intval($size1));
+        $img->save($path.$size_folder.'/'.$image);
+    }
+
+    return url('storage/media/image/' . $size_folder . '/' . $image);
+}
+
+function flash($flash)
+{
+    $html = '';
+
+    if ($flash) {
+      $html .= '<div class="alert alert-'.$flash['status'].'">'.$flash['message'].'</div>';
+    }
+
+    return $html;
 }

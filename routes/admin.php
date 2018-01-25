@@ -9,7 +9,7 @@ Route::group(['prefix' => 'authority'], function () {
       Route::post('configuration', 'AdminControllers\ConfigurationController@initProcessCreate');
 
       //Clear Cache
-      Route::get('clear/cache', 'AdminControllers\ConfigurationController@initClearCache');
+      Route::get('clear/cache', 'AdminControllers\ConfigurationController@initProcessClearCache');
 
       //Media
       Route::get('media', 'AdminControllers\MediaController@initListing');
@@ -18,7 +18,7 @@ Route::group(['prefix' => 'authority'], function () {
       Route::post('media/save/cropped/{id_media}', 'AdminControllers\MediaController@initCreatingSaveCropped');
       Route::post('media/save/{id_media}', 'AdminControllers\MediaController@initCreatingSave');
       Route::get('media/library', 'AdminControllers\MediaController@initGetLibrary');
-      Route::get('media/library/{type}/{object_type}', 'AdminControllers\MediaController@initGetLibrary');
+      Route::get('media/library/{type}', 'AdminControllers\MediaController@initGetLibrary');
       Route::get('media/delete/{id_media}', 'AdminControllers\MediaController@initDeleting');
 
     });

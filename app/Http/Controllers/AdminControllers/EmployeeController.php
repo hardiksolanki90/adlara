@@ -52,12 +52,12 @@ class EmployeeController extends AdminController
 
         $this->page['head'] = 'Employee Create';
 
-        $data = [
+        $this->assign = [
           'id' => $id,
           'admin_user' => $admin_user
         ];
 
-        return $this->template('employee/create', $data);
+        return $this->template('employee/create');
     }
 
     protected function create(array $data)

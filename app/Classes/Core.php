@@ -40,4 +40,16 @@ class Core
 
         return (object) $fields;
     }
+
+    public function getUploadDir($type = 'image')
+    {
+        $upload = [
+          'image' => storage_path('media/image'),
+          'video' => storage_path('media/video/'),
+          'audio' => storage_path('media/audio/'),
+          'pdf' => storage_path('media/pdf/'),
+        ];
+
+        return $upload[$type];
+    }
 }

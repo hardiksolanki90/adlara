@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
   {!! $form->start('admin-user-create', 'myForm') !!}
+
+      {!! $form->media('media', 'Choose Media', $admin_user->media) !!}
+
         {!! $form->mdtext([
           'name' => 'name',
           'label' => t('Name'),

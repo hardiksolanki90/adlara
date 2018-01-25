@@ -1,0 +1,5 @@
+[22-Jan-2018 13:11:37 UTC] PHP Fatal error:  Cannot redeclare App\Classes\Context::getConfiguration() in /home/myadlara/public_html/dev/app/Classes/Context.php on line 142
+[22-Jan-2018 14:13:23 UTC] PHP Warning:  Module 'redis' already loaded in Unknown on line 0
+[22-Jan-2018 14:14:59 UTC] PHP Warning:  Module 'redis' already loaded in Unknown on line 0
+[24-Jan-2018 12:20:13 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/myadlara/public_html/dev/app/helper.php on line 364
+[24-Jan-2018 12:21:00 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/myadlara/public_html/dev/app/helper.php on line 364
